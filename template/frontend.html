@@ -1,0 +1,160 @@
+<style>
+#bbhj-widget *{box-sizing:border-box;margin:0;padding:0}
+#bbhj-widget{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif}
+#bbhj-widget img{max-width:100%;border:0}
+
+#bbhj-widget .bbhj-card{position:fixed;left:-100%;bottom:16px;z-index:1000;max-width:460px;min-width:350px;background:#fff;box-shadow:0 0 3px rgba(0,0,0,.2);border-radius:0 3px 3px 0;overflow:hidden;transition:left .3s;cursor:pointer;outline:none}
+#bbhj-widget .bbhj-card.bbhj-on{left:0}
+#bbhj-widget .bbhj-card:focus-visible{box-shadow:0 0 0 3px rgba(0,82,217,.35),0 0 3px rgba(0,0,0,.2)}
+
+#bbhj-widget .bbhj-head{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#edeef3;color:#6e6e6e;border-radius:0 3px 0 0}
+#bbhj-widget .bbhj-title{font-size:16px;font-weight:700;color:#000}
+#bbhj-widget .bbhj-title small{display:block;margin-top:2px;font-size:12px;font-weight:400;color:#6e6e6e}
+#bbhj-widget .bbhj-close{font-size:18px;line-height:1;color:#000;background:none;border:0;cursor:pointer;padding:0;opacity:.85}
+#bbhj-widget .bbhj-close:hover{opacity:1}
+
+#bbhj-widget .bbhj-preview{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;background:#f5f5f5}
+
+#bbhj-widget .bbhj-tip{display:flex;align-items:center;padding:10px 14px;gap:10px}
+#bbhj-widget .bbhj-tip strong{margin-left:auto;color:#fff;background:#0052d9;border-radius:1px;padding:10px 20px;font-size:12px;font-weight:400;text-align:center;white-space:nowrap}
+#bbhj-widget .bbhj-tip span{font-size:12px;color:#6e6e6e}
+
+#bbhj-widget .bbhj-mask{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.55)}
+#bbhj-widget .bbhj-mask.bbhj-open{display:flex}
+
+#bbhj-widget .bbhj-modal{position:relative;width:100%;max-width:920px;max-height:94vh;background:#fff;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:bbhj-pop .25s ease}
+@keyframes bbhj-pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+#bbhj-widget .bbhj-modal-head{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#edeef3;color:#6e6e6e;border-radius:3px 3px 0 0;flex:none}
+#bbhj-widget .bbhj-modal-title{font-size:16px;font-weight:700;color:#000}
+#bbhj-widget .bbhj-modal-close{font-size:18px;line-height:1;color:#000;background:none;border:0;cursor:pointer;padding:0;opacity:.85}
+#bbhj-widget .bbhj-modal-close:hover{opacity:1}
+
+#bbhj-widget .bbhj-notice{padding:10px 14px;font-size:12px;line-height:1.8;color:#6e6e6e;border-bottom:1px solid #f0f0f0;flex:none}
+
+#bbhj-widget .bbhj-modal-image{display:block;width:100%;max-height:72vh;height:auto;object-fit:contain;background:#f5f5f5;flex:1 1 auto;min-height:0}
+
+#bbhj-widget .bbhj-actions{display:flex;flex-direction:row-reverse;gap:10px;padding:10px 14px;flex:none}
+#bbhj-widget .bbhj-actions a{color:#fff;background:#0052d9;border-radius:1px;padding:10px 20px;font-size:12px;font-weight:400;text-align:center;text-decoration:none;transition:all .3s ease-out;white-space:nowrap}
+#bbhj-widget .bbhj-actions a:hover{color:#fff;opacity:.9}
+#bbhj-widget .bbhj-actions .bbhj-action-close{color:#fff;background:#ccc;border-radius:1px;padding:10px 20px;font-size:12px;border:0;cursor:pointer;transition:all .3s ease-out;white-space:nowrap}
+#bbhj-widget .bbhj-actions .bbhj-action-close:hover{background:#b8b8b8}
+
+@media (max-width:768px){
+  #bbhj-widget .bbhj-card{width:100%;min-width:0;bottom:12px}
+  #bbhj-widget .bbhj-preview{max-height:220px}
+  #bbhj-widget .bbhj-head{padding:8px 14px}
+  #bbhj-widget .bbhj-tip{padding:8px 12px}
+}
+</style>
+
+<section id="bbhj-widget" aria-label="宝贝回家公益寻亲信息" data-api="{api_url}" data-delay="{delay_ms}">
+  <div class="bbhj-card" role="button" tabindex="0" aria-label="查看寻亲海报">
+    <div class="bbhj-head">
+      <div class="bbhj-title">宝贝回家<small>公益寻亲信息展示</small></div>
+      <button class="bbhj-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <img class="bbhj-preview" crossorigin="anonymous" src="{api_url}" alt="随机寻亲信息海报">
+    <div class="bbhj-tip">
+      <span>点击查看海报详情</span>
+      <strong>助力寻亲</strong>
+    </div>
+  </div>
+
+  <div class="bbhj-mask" role="dialog" aria-modal="true" aria-label="寻亲信息海报">
+    <div class="bbhj-modal">
+      <div class="bbhj-modal-head">
+        <div class="bbhj-modal-title">寻亲信息海报</div>
+        <button class="bbhj-modal-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <div class="bbhj-notice">
+        公益信息展示：海报由第三方公开接口提供，内容可能随来源更新而变化。本组件不对信息的实时性、完整性或准确性作保证；请以宝贝回家官方网站发布的信息为准。
+      </div>
+      <img class="bbhj-modal-image" alt="寻亲信息海报">
+      <div class="bbhj-actions">
+        <a href="{official_url}" target="_blank" rel="noopener noreferrer">前往宝贝回家官网</a>
+        <button class="bbhj-action-close" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById("bbhj-widget");
+  if (!root) return;
+  var card = root.querySelector(".bbhj-card");
+  var mask = root.querySelector(".bbhj-mask");
+  var preview = root.querySelector(".bbhj-preview");
+  var modalImage = root.querySelector(".bbhj-modal-image");
+  var apiUrl = root.getAttribute("data-api") || "";
+  var delay = parseInt(root.getAttribute("data-delay") || "1200", 10);
+
+  function placeholder() {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">'
+      + '<rect width="100%" height="100%" fill="#f0f0f0"/>'
+      + '<text x="200" y="150" text-anchor="middle" font-size="15" fill="#999">海报加载失败，请前往官网查看</text>'
+      + '</svg>';
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+  function fail(img) { img.onerror = null; img.src = placeholder(); }
+
+var retried = false;
+  preview.onerror = function () {
+    if (!retried && apiUrl) {
+      retried = true;
+      preview.removeAttribute("crossorigin");
+      preview.src = apiUrl;
+      return;
+    }
+    fail(preview);
+  };
+  modalImage.onerror = function () { fail(modalImage); };
+
+setTimeout(function () { card.classList.add("bbhj-on"); }, isNaN(delay) ? 1200 : delay);
+
+  function openModal() {
+    mask.classList.add("bbhj-open");
+    var copied = false;
+    try {
+if (preview.complete && preview.naturalWidth > 0) {
+        var canvas = document.createElement("canvas");
+        canvas.width = preview.naturalWidth;
+        canvas.height = preview.naturalHeight;
+        canvas.getContext("2d").drawImage(preview, 0, 0);
+        var copySrc = canvas.toDataURL("image/png");
+        if (copySrc && copySrc.indexOf("data:image") === 0) {
+          modalImage.src = copySrc;
+          copied = true;
+        }
+      }
+    } catch (e) {}
+    if (!copied) {
+      modalImage.src = preview.src || apiUrl;
+    }
+  }
+  function closeModal() {
+    mask.classList.remove("bbhj-open");
+  }
+  function hideCard() {
+    card.classList.remove("bbhj-on");
+  }
+
+  card.addEventListener("click", function (e) {
+    if (e.target.closest(".bbhj-close")) { hideCard(); return; }
+    openModal();
+  });
+  card.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(); }
+  });
+
+  root.querySelectorAll(".bbhj-modal-close, .bbhj-action-close").forEach(function (btn) {
+    btn.addEventListener("click", closeModal);
+  });
+  mask.addEventListener("click", function (e) {
+    if (e.target === mask) closeModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModal();
+  });
+})();
+</script>
