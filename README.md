@@ -6,6 +6,9 @@
 - 版本：1.0.0
 - 适用：魔方财务系统（ThinkCMF 插件体系，addons 模块）
 
+<img width="1767" height="943" alt="image" src="https://github.com/user-attachments/assets/ed2b4afe-5674-41aa-b2ee-40cfaecc01bb" />
+
+
 ## 安装
 
 1. 将 `bbhj_widget` 目录（或 `bbhj_widget.zip` 解压后的内容）上传到 `public/plugins/addons/`
